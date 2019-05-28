@@ -2,15 +2,18 @@ language: python
 services: postgresql
 matrix:
   include:
-    - python: 3.7
-      dist: xenial
-      sudo: true
+  - python: 3.7
+    dist: xenial
+    sudo: true
 before_install:
-  - export DJANGO_SETTINGS_MODULE=spbu4u_core.settings
+- export DJANGO_SETTINGS_MODULE=spbu4u_core.settings
 install:
-  - pip install -r requirements.txt
+- pip install -r requirements.txt
 before_script:
-  - psql -c "CREATE DATABASE travis_test;" -U postgres
-  - python manage.py migrate
+- psql -c "CREATE DATABASE travis_test;" -U postgres
+- python manage.py migrate
 script:
-  - python manage.py test
+- python manage.py test
+notifications:
+  slack:
+    secure: cnIs3PDh9I6pNgSWIf5j+Ua498CaLRE567WUH8yoWJ/L5fmzdkDCUTlPICaP+8uLnvZuRpAMGphH7W+YQ/SJBwL0ZGUgnx9J7zgL1+yP9q99jwmHLrWSS/jc/e6ia0DJclbS1LTFKGqd+cEt015vPWp2o4qXK6+ejGYkn1n6rSR+uN9YKuHTwY11EYSnDlMU6Xf2ot2NnU1lvJ0suLwvnc3SdNYLnef62VeXHjgvo0R86beeBDRRWkkpw5EXjwQmxSdlpWbxgH9weaEhQl+YPlrEaedOsB536KIZ9maFqpTLaCtIa0+oxeOIZoQAhMKNOkLGhsXu13sQkoXzuNlZm6Ansx5FO8tFq7wdqCxZE1Z+YsDOhyxHLeImLPBu59hq2Lyfrm4rNFWNDzG+j/n04MyqZ7GOzduU5ioFhoMToIevaVIGt5hCS2vuQx+1a1flEtj7dU4Qewi8LOKAL/zgAK/YuewGWF0Xobu5b0lj/p1Ul8Zv0fgGEprkrTwu+HKb/+AfLguLivG+8O40l+cUS8stugYhXUwMXKcfTyv4TABY7UxBESN9LygKG4j35eUAZO1UhO2LnQ+9pZMMXjuYPgQlN210KJgkFiF68O2Nct99ahcWFXqGvUZyitzVyddZNXFQk7aqOaV/2qmFk84GQi343a/7OnsFTqtZE6GT9B8=
